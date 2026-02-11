@@ -1,0 +1,15 @@
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_034"
+  name: "Ensure termination grace period is appropriately configured"
+  category: "KUBERNETES_CONFIGURATION"
+  severity: "LOW"
+  guideline: "Proper termination grace period allows applications to shut down gracefully, preventing data loss and ensuring smooth deployments in cloud environments."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+  attribute: "spec.template.spec.terminationGracePeriodSeconds"
+  operator: "exists"

@@ -1,0 +1,14 @@
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_033"
+  name: "Ensure active deadline seconds is set for jobs"
+  category: "KUBERNETES_CONFIGURATION"
+  severity: "LOW"
+  guideline: "Setting activeDeadlineSeconds prevents jobs from running indefinitely, which is important for resource management and cost control in cloud environments."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Job"
+    - "CronJob"
+  attribute: "spec.activeDeadlineSeconds"
+  operator: "exists"
