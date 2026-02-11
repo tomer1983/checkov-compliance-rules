@@ -1,0 +1,13 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_027"
+  name: "Ensure pod anti-affinity is set for high availability"
+  category: "KUBERNETES_CONFIGURATION"
+  severity: "LOW"
+  guideline: "Pod anti-affinity spreads replicas across nodes, improving resilience to node failures."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Deployment"
+    - "StatefulSet"
+  attribute: "spec.template.spec.affinity.podAntiAffinity"
+  operator: "exists"

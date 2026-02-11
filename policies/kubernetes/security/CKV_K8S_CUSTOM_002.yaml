@@ -1,0 +1,31 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_002"
+  name: "Ensure container does not run in privileged mode"
+  category: "KUBERNETES_SECURITY"
+  severity: "CRITICAL"
+  guideline: "Privileged containers have access to all devices on the host and can bypass most security features. Set privileged to false."
+definition:
+  or:
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+        - "ReplicaSet"
+      attribute: "spec.containers[*].securityContext.privileged"
+      operator: "not_exists"
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+        - "ReplicaSet"
+      attribute: "spec.containers[*].securityContext.privileged"
+      operator: "equals"
+      value: false

@@ -1,0 +1,13 @@
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_001"
+  name: "Ensure ServiceAccount has IAM role annotation for IRSA"
+  category: "AWS_EKS_SECURITY"
+  severity: "HIGH"
+  guideline: "IAM Roles for Service Accounts (IRSA) provides fine-grained IAM permissions to pods without sharing credentials."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "ServiceAccount"
+  attribute: "metadata.annotations.eks.amazonaws.com/role-arn"
+  operator: "exists"

@@ -1,0 +1,18 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_029"
+  name: "Ensure labels are defined for resources"
+  category: "KUBERNETES_CONFIGURATION"
+  severity: "LOW"
+  guideline: "Labels are essential for resource organization, monitoring, and troubleshooting."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+    - "Service"
+    - "ConfigMap"
+    - "Secret"
+  attribute: "metadata.labels"
+  operator: "exists"

@@ -1,0 +1,13 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_008"
+  name: "Ensure ALB Ingress has SSL redirect enabled"
+  category: "AWS_EKS_NETWORKING"
+  severity: "MEDIUM"
+  guideline: "Redirect HTTP traffic to HTTPS for better security."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Ingress"
+  attribute: "metadata.annotations.alb.ingress.kubernetes.io/ssl-redirect"
+  operator: "equals"
+  value: "443"

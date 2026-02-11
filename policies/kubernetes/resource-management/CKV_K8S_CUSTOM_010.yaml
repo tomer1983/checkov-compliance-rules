@@ -1,0 +1,18 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_010"
+  name: "Ensure container has memory requests defined"
+  category: "KUBERNETES_RESOURCE_MANAGEMENT"
+  severity: "MEDIUM"
+  guideline: "Memory requests ensure predictable pod scheduling and prevent resource contention issues."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+    - "Job"
+    - "CronJob"
+    - "ReplicaSet"
+  attribute: "spec.containers[*].resources.requests.memory"
+  operator: "exists"

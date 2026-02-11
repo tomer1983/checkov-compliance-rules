@@ -1,0 +1,12 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_012"
+  name: "Ensure LimitRange is defined for namespace"
+  category: "KUBERNETES_RESOURCE_MANAGEMENT"
+  severity: "LOW"
+  guideline: "LimitRanges enforce minimum and maximum resource constraints for pods and containers in a namespace."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "LimitRange"
+  attribute: "spec.limits"
+  operator: "exists"

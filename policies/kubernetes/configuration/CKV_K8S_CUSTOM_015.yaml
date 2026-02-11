@@ -1,0 +1,15 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_015"
+  name: "Ensure startup probe is defined for slow-starting containers"
+  category: "KUBERNETES_CONFIGURATION"
+  severity: "LOW"
+  guideline: "Startup probes protect slow-starting containers from being killed by liveness probes during initialization."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+  attribute: "spec.containers[*].startupProbe"
+  operator: "exists"

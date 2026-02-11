@@ -1,0 +1,20 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_013"
+  name: "Ensure LoadBalancer service uses NLB with internal scheme for private APIs"
+  category: "AWS_EKS_NETWORKING"
+  severity: "MEDIUM"
+  guideline: "Internal services should use internal load balancers to prevent public exposure."
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "Service"
+      attribute: "spec.type"
+      operator: "equals"
+      value: "LoadBalancer"
+    - cond_type: "attribute"
+      resource_types:
+        - "Service"
+      attribute: "metadata.annotations.service.beta.kubernetes.io/aws-load-balancer-internal"
+      operator: "equals"
+      value: "true"

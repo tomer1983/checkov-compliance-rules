@@ -1,0 +1,13 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_010"
+  name: "Ensure ALB targets are in internal subnet for private services"
+  category: "AWS_EKS_NETWORKING"
+  severity: "MEDIUM"
+  guideline: "Internal ALBs should be deployed in private subnets for better security."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Ingress"
+  attribute: "metadata.annotations.alb.ingress.kubernetes.io/scheme"
+  operator: "equals"
+  value: "internal"

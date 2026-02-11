@@ -1,0 +1,32 @@
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_001"
+  name: "Ensure container does not run as root user"
+  category: "KUBERNETES_SECURITY"
+  severity: "HIGH"
+  guideline: "Running containers as root increases the risk of privilege escalation attacks. Set runAsNonRoot to true in securityContext."
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+        - "ReplicaSet"
+      attribute: "spec.containers[*].securityContext.runAsNonRoot"
+      operator: "exists"
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+        - "ReplicaSet"
+      attribute: "spec.containers[*].securityContext.runAsNonRoot"
+      operator: "equals"
+      value: true

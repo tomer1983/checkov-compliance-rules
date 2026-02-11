@@ -1,0 +1,13 @@
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_007"
+  name: "Ensure ALB Ingress uses HTTPS listener"
+  category: "AWS_EKS_NETWORKING"
+  severity: "HIGH"
+  guideline: "ALB Ingresses should use HTTPS to encrypt traffic in transit."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Ingress"
+  attribute: "metadata.annotations.alb.ingress.kubernetes.io/certificate-arn"
+  operator: "exists"

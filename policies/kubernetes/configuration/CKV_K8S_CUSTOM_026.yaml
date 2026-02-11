@@ -1,0 +1,12 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_026"
+  name: "Ensure PodDisruptionBudget is defined for highly available applications"
+  category: "KUBERNETES_CONFIGURATION"
+  severity: "LOW"
+  guideline: "PodDisruptionBudgets ensure minimum availability during voluntary disruptions like node drains."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "PodDisruptionBudget"
+  attribute: "spec"
+  operator: "exists"

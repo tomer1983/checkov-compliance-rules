@@ -1,0 +1,20 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_006"
+  name: "Ensure EBS CSI driver volumes are encrypted"
+  category: "AWS_EKS_SECURITY"
+  severity: "HIGH"
+  guideline: "EBS volumes should be encrypted at rest for data protection."
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "StorageClass"
+      attribute: "provisioner"
+      operator: "equals"
+      value: "ebs.csi.aws.com"
+    - cond_type: "attribute"
+      resource_types:
+        - "StorageClass"
+      attribute: "parameters.encrypted"
+      operator: "equals"
+      value: "true"

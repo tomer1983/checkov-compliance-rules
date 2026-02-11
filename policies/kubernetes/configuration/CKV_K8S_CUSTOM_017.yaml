@@ -1,0 +1,21 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_017"
+  name: "Ensure imagePullPolicy is set to Always or IfNotPresent"
+  category: "KUBERNETES_CONFIGURATION"
+  severity: "LOW"
+  guideline: "Proper imagePullPolicy ensures consistent and secure image usage across deployments."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+    - "Job"
+    - "CronJob"
+    - "ReplicaSet"
+  attribute: "spec.containers[*].imagePullPolicy"
+  operator: "within"
+  value:
+    - "Always"
+    - "IfNotPresent"

@@ -1,0 +1,19 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_003"
+  name: "Ensure containers drop all capabilities"
+  category: "KUBERNETES_SECURITY"
+  severity: "HIGH"
+  guideline: "Dropping all Linux capabilities reduces the attack surface by removing unnecessary privileges from containers."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+    - "Job"
+    - "CronJob"
+    - "ReplicaSet"
+  attribute: "spec.containers[*].securityContext.capabilities.drop[*]"
+  operator: "contains"
+  value: "ALL"

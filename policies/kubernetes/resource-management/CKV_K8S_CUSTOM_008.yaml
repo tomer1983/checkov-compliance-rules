@@ -1,0 +1,18 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_008"
+  name: "Ensure container has memory limits defined"
+  category: "KUBERNETES_RESOURCE_MANAGEMENT"
+  severity: "MEDIUM"
+  guideline: "Setting memory limits prevents OOM issues and ensures fair resource distribution across containers."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+    - "Job"
+    - "CronJob"
+    - "ReplicaSet"
+  attribute: "spec.containers[*].resources.limits.memory"
+  operator: "exists"

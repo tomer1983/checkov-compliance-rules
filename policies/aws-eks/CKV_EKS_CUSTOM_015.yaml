@@ -1,0 +1,22 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_015"
+  name: "Ensure EBS volume has proper volume type configured"
+  category: "AWS_EKS_STORAGE"
+  severity: "LOW"
+  guideline: "Use gp3 volumes for better performance and cost optimization."
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "StorageClass"
+      attribute: "provisioner"
+      operator: "equals"
+      value: "ebs.csi.aws.com"
+    - cond_type: "attribute"
+      resource_types:
+        - "StorageClass"
+      attribute: "parameters.type"
+      operator: "within"
+      value:
+        - "gp3"
+        - "io2"

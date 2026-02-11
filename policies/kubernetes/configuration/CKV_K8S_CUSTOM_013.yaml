@@ -1,0 +1,16 @@
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_013"
+  name: "Ensure container has liveness probe defined"
+  category: "KUBERNETES_CONFIGURATION"
+  severity: "MEDIUM"
+  guideline: "Liveness probes help Kubernetes detect when containers are unhealthy and need to be restarted."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+  attribute: "spec.containers[*].livenessProbe"
+  operator: "exists"

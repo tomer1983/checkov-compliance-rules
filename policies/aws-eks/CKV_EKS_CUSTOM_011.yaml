@@ -1,0 +1,12 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_011"
+  name: "Ensure ALB has WAF enabled"
+  category: "AWS_EKS_NETWORKING"
+  severity: "MEDIUM"
+  guideline: "Web Application Firewall (WAF) provides protection against common web exploits."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Ingress"
+  attribute: "metadata.annotations.alb.ingress.kubernetes.io/wafv2-acl-arn"
+  operator: "exists"

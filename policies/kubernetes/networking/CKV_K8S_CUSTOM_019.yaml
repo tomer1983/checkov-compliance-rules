@@ -1,0 +1,13 @@
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_019"
+  name: "Ensure NetworkPolicy is defined for pod"
+  category: "KUBERNETES_NETWORKING"
+  severity: "MEDIUM"
+  guideline: "NetworkPolicies control traffic flow between pods, implementing network segmentation and reducing attack surface."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "NetworkPolicy"
+  attribute: "spec"
+  operator: "exists"

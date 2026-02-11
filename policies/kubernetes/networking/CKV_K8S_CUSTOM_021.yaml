@@ -1,0 +1,29 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_021"
+  name: "Ensure hostNetwork is not enabled"
+  category: "KUBERNETES_NETWORKING"
+  severity: "HIGH"
+  guideline: "Using hostNetwork gives the pod access to the host's network namespace, increasing security risks."
+definition:
+  or:
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+      attribute: "spec.hostNetwork"
+      operator: "not_exists"
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+      attribute: "spec.hostNetwork"
+      operator: "equals"
+      value: false
