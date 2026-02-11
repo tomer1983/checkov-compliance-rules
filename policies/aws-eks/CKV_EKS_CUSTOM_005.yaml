@@ -1,0 +1,13 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_005"
+  name: "Ensure FSx for Lustre CSI driver uses encryption"
+  category: "AWS_EKS_SECURITY"
+  severity: "HIGH"
+  guideline: "FSx volumes should be encrypted at rest to protect sensitive data."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "StorageClass"
+  attribute: "parameters.encrypted"
+  operator: "equals"
+  value: "true"

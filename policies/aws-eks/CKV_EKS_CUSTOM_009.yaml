@@ -1,0 +1,12 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_009"
+  name: "Ensure ALB has proper security group configuration"
+  category: "AWS_EKS_NETWORKING"
+  severity: "MEDIUM"
+  guideline: "ALB should have security groups defined for proper network isolation."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Ingress"
+  attribute: "metadata.annotations.alb.ingress.kubernetes.io/security-groups"
+  operator: "exists"

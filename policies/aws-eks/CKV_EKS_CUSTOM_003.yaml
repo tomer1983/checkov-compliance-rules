@@ -1,0 +1,29 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_003"
+  name: "Ensure pod uses ServiceAccount for AWS authentication"
+  category: "AWS_EKS_SECURITY"
+  severity: "HIGH"
+  guideline: "Pods should use ServiceAccounts with IRSA instead of embedding AWS credentials."
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+      attribute: "spec.serviceAccountName"
+      operator: "exists"
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+      attribute: "spec.serviceAccountName"
+      operator: "not_equals"
+      value: "default"

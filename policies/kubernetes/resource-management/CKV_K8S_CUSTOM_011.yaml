@@ -1,0 +1,12 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_011"
+  name: "Ensure ResourceQuota is defined for namespace"
+  category: "KUBERNETES_RESOURCE_MANAGEMENT"
+  severity: "LOW"
+  guideline: "ResourceQuotas prevent resource exhaustion by limiting the total resources that can be consumed in a namespace."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "ResourceQuota"
+  attribute: "spec.hard"
+  operator: "exists"

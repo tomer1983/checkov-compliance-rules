@@ -1,0 +1,15 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_017"
+  name: "Ensure StorageClass has proper reclaim policy"
+  category: "AWS_EKS_STORAGE"
+  severity: "MEDIUM"
+  guideline: "Use 'Retain' or 'Delete' reclaim policy based on data retention requirements."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "StorageClass"
+  attribute: "reclaimPolicy"
+  operator: "within"
+  value:
+    - "Retain"
+    - "Delete"

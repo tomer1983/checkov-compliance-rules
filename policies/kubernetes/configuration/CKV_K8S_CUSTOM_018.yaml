@@ -1,0 +1,19 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_018"
+  name: "Ensure container image uses trusted registry"
+  category: "KUBERNETES_CONFIGURATION"
+  severity: "HIGH"
+  guideline: "Using images from trusted registries prevents supply chain attacks and ensures image integrity."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+    - "Job"
+    - "CronJob"
+    - "ReplicaSet"
+  attribute: "spec.containers[*].image"
+  operator: "regex_match"
+  value: "^(gcr\\.io|[a-z0-9-]+\\.azurecr\\.io|[0-9]+\\.dkr\\.ecr\\.[a-z0-9-]+\\.amazonaws\\.com|quay\\.io|docker\\.io)/.*"

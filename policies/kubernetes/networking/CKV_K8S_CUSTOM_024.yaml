@@ -1,0 +1,19 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_024"
+  name: "Ensure Service does not use default namespace"
+  category: "KUBERNETES_NETWORKING"
+  severity: "LOW"
+  guideline: "Using default namespace makes it harder to manage and secure resources. Create dedicated namespaces."
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "Service"
+      attribute: "metadata.namespace"
+      operator: "exists"
+    - cond_type: "attribute"
+      resource_types:
+        - "Service"
+      attribute: "metadata.namespace"
+      operator: "not_equals"
+      value: "default"

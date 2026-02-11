@@ -1,0 +1,29 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_023"
+  name: "Ensure hostIPC is not enabled"
+  category: "KUBERNETES_NETWORKING"
+  severity: "HIGH"
+  guideline: "Enabling hostIPC allows the pod to access the host's IPC namespace, creating security vulnerabilities."
+definition:
+  or:
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+      attribute: "spec.hostIPC"
+      operator: "not_exists"
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+      attribute: "spec.hostIPC"
+      operator: "equals"
+      value: false

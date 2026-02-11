@@ -1,0 +1,13 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_012"
+  name: "Ensure NLB has cross-zone load balancing enabled"
+  category: "AWS_EKS_NETWORKING"
+  severity: "LOW"
+  guideline: "Cross-zone load balancing improves availability and distributes traffic evenly."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Service"
+  attribute: "metadata.annotations.service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled"
+  operator: "equals"
+  value: "true"

@@ -1,0 +1,14 @@
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_014"
+  name: "Ensure pod uses EBS CSI driver for persistent storage"
+  category: "AWS_EKS_STORAGE"
+  severity: "MEDIUM"
+  guideline: "Use EBS CSI driver for persistent storage instead of deprecated in-tree provisioners."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "StorageClass"
+  attribute: "provisioner"
+  operator: "equals"
+  value: "ebs.csi.aws.com"

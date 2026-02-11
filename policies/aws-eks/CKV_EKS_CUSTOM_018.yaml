@@ -1,0 +1,12 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_018"
+  name: "Ensure PersistentVolumeClaim requests appropriate storage size"
+  category: "AWS_EKS_STORAGE"
+  severity: "LOW"
+  guideline: "PVCs should request appropriate storage to avoid waste and ensure sufficient capacity."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "PersistentVolumeClaim"
+  attribute: "spec.resources.requests.storage"
+  operator: "exists"

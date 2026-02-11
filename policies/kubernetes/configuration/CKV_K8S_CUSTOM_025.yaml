@@ -1,0 +1,16 @@
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_025"
+  name: "Ensure deployment has appropriate replica count"
+  category: "KUBERNETES_CONFIGURATION"
+  severity: "LOW"
+  guideline: "Running at least 2 replicas ensures high availability and reduces single point of failure."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Deployment"
+    - "StatefulSet"
+    - "ReplicaSet"
+  attribute: "spec.replicas"
+  operator: "greater_than_or_equal"
+  value: 2

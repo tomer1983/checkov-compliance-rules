@@ -1,0 +1,30 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_004"
+  name: "Ensure no AWS credentials in environment variables"
+  category: "AWS_EKS_SECURITY"
+  severity: "CRITICAL"
+  guideline: "Never store AWS credentials in environment variables. Use IRSA instead."
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+      attribute: "spec.containers[*].env[*].name"
+      operator: "not_contains"
+      value: "AWS_ACCESS_KEY_ID"
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+      attribute: "spec.containers[*].env[*].name"
+      operator: "not_contains"
+      value: "AWS_SECRET_ACCESS_KEY"

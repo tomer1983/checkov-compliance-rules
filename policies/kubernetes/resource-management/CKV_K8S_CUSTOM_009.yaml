@@ -1,0 +1,18 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_009"
+  name: "Ensure container has CPU requests defined"
+  category: "KUBERNETES_RESOURCE_MANAGEMENT"
+  severity: "MEDIUM"
+  guideline: "CPU requests help the scheduler make informed decisions about pod placement and ensure baseline resource availability."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+    - "Job"
+    - "CronJob"
+    - "ReplicaSet"
+  attribute: "spec.containers[*].resources.requests.cpu"
+  operator: "exists"

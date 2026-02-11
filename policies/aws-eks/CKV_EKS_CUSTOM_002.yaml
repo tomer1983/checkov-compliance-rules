@@ -1,0 +1,13 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_002"
+  name: "Ensure IAM role ARN follows naming convention"
+  category: "AWS_EKS_SECURITY"
+  severity: "MEDIUM"
+  guideline: "IAM role ARNs should follow AWS ARN format and be properly scoped to EKS."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "ServiceAccount"
+  attribute: "metadata.annotations.eks.amazonaws.com/role-arn"
+  operator: "regex_match"
+  value: "^arn:aws:iam::[0-9]{12}:role/.*"

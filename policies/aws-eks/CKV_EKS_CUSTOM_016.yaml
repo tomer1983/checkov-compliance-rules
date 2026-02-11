@@ -1,0 +1,13 @@
+metadata:
+  id: "CKV_EKS_CUSTOM_016"
+  name: "Ensure EFS CSI driver is used for shared storage"
+  category: "AWS_EKS_STORAGE"
+  severity: "LOW"
+  guideline: "EFS CSI driver provides shared file storage across multiple pods and availability zones."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "StorageClass"
+  attribute: "provisioner"
+  operator: "equals"
+  value: "efs.csi.aws.com"

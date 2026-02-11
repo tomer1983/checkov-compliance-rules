@@ -1,0 +1,13 @@
+metadata:
+  id: "CKV_K8S_CUSTOM_028"
+  name: "Ensure deployment strategy is properly configured"
+  category: "KUBERNETES_CONFIGURATION"
+  severity: "LOW"
+  guideline: "Proper deployment strategy (RollingUpdate) ensures zero-downtime deployments."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Deployment"
+  attribute: "spec.strategy.type"
+  operator: "equals"
+  value: "RollingUpdate"
