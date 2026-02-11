@@ -1,0 +1,107 @@
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_007"
+  name: "Ensure container has CPU limits defined"
+  category: "KUBERNETES_RESOURCE_MANAGEMENT"
+  severity: "MEDIUM"
+  guideline: "Setting CPU limits prevents a single container from consuming all available CPU resources on a node."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+    - "Job"
+    - "CronJob"
+    - "ReplicaSet"
+  attribute: "spec.containers[*].resources.limits.cpu"
+  operator: "exists"
+
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_008"
+  name: "Ensure container has memory limits defined"
+  category: "KUBERNETES_RESOURCE_MANAGEMENT"
+  severity: "MEDIUM"
+  guideline: "Setting memory limits prevents OOM issues and ensures fair resource distribution across containers."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+    - "Job"
+    - "CronJob"
+    - "ReplicaSet"
+  attribute: "spec.containers[*].resources.limits.memory"
+  operator: "exists"
+
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_009"
+  name: "Ensure container has CPU requests defined"
+  category: "KUBERNETES_RESOURCE_MANAGEMENT"
+  severity: "MEDIUM"
+  guideline: "CPU requests help the scheduler make informed decisions about pod placement and ensure baseline resource availability."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+    - "Job"
+    - "CronJob"
+    - "ReplicaSet"
+  attribute: "spec.containers[*].resources.requests.cpu"
+  operator: "exists"
+
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_010"
+  name: "Ensure container has memory requests defined"
+  category: "KUBERNETES_RESOURCE_MANAGEMENT"
+  severity: "MEDIUM"
+  guideline: "Memory requests ensure predictable pod scheduling and prevent resource contention issues."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "Pod"
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+    - "Job"
+    - "CronJob"
+    - "ReplicaSet"
+  attribute: "spec.containers[*].resources.requests.memory"
+  operator: "exists"
+
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_011"
+  name: "Ensure ResourceQuota is defined for namespace"
+  category: "KUBERNETES_RESOURCE_MANAGEMENT"
+  severity: "LOW"
+  guideline: "ResourceQuotas prevent resource exhaustion by limiting the total resources that can be consumed in a namespace."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "ResourceQuota"
+  attribute: "spec.hard"
+  operator: "exists"
+
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_012"
+  name: "Ensure LimitRange is defined for namespace"
+  category: "KUBERNETES_RESOURCE_MANAGEMENT"
+  severity: "LOW"
+  guideline: "LimitRanges enforce minimum and maximum resource constraints for pods and containers in a namespace."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "LimitRange"
+  attribute: "spec.limits"
+  operator: "exists"

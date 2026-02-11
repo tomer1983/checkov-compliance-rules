@@ -1,0 +1,128 @@
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_001"
+  name: "Ensure ServiceAccount has IAM role annotation for IRSA"
+  category: "AWS_EKS_SECURITY"
+  severity: "HIGH"
+  guideline: "IAM Roles for Service Accounts (IRSA) provides fine-grained IAM permissions to pods without sharing credentials."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "ServiceAccount"
+  attribute: "metadata.annotations.eks.amazonaws.com/role-arn"
+  operator: "exists"
+
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_002"
+  name: "Ensure IAM role ARN follows naming convention"
+  category: "AWS_EKS_SECURITY"
+  severity: "MEDIUM"
+  guideline: "IAM role ARNs should follow AWS ARN format and be properly scoped to EKS."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "ServiceAccount"
+  attribute: "metadata.annotations.eks.amazonaws.com/role-arn"
+  operator: "regex_match"
+  value: "^arn:aws:iam::[0-9]{12}:role/.*"
+
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_003"
+  name: "Ensure pod uses ServiceAccount for AWS authentication"
+  category: "AWS_EKS_SECURITY"
+  severity: "HIGH"
+  guideline: "Pods should use ServiceAccounts with IRSA instead of embedding AWS credentials."
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+      attribute: "spec.serviceAccountName"
+      operator: "exists"
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+      attribute: "spec.serviceAccountName"
+      operator: "not_equals"
+      value: "default"
+
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_004"
+  name: "Ensure no AWS credentials in environment variables"
+  category: "AWS_EKS_SECURITY"
+  severity: "CRITICAL"
+  guideline: "Never store AWS credentials in environment variables. Use IRSA instead."
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+      attribute: "spec.containers[*].env[*].name"
+      operator: "not_contains"
+      value: "AWS_ACCESS_KEY_ID"
+    - cond_type: "attribute"
+      resource_types:
+        - "Pod"
+        - "Deployment"
+        - "StatefulSet"
+        - "DaemonSet"
+        - "Job"
+        - "CronJob"
+      attribute: "spec.containers[*].env[*].name"
+      operator: "not_contains"
+      value: "AWS_SECRET_ACCESS_KEY"
+
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_005"
+  name: "Ensure FSx for Lustre CSI driver uses encryption"
+  category: "AWS_EKS_SECURITY"
+  severity: "HIGH"
+  guideline: "FSx volumes should be encrypted at rest to protect sensitive data."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "StorageClass"
+  attribute: "parameters.encrypted"
+  operator: "equals"
+  value: "true"
+
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_006"
+  name: "Ensure EBS CSI driver volumes are encrypted"
+  category: "AWS_EKS_SECURITY"
+  severity: "HIGH"
+  guideline: "EBS volumes should be encrypted at rest for data protection."
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "StorageClass"
+      attribute: "provisioner"
+      operator: "equals"
+      value: "ebs.csi.aws.com"
+    - cond_type: "attribute"
+      resource_types:
+        - "StorageClass"
+      attribute: "parameters.encrypted"
+      operator: "equals"
+      value: "true"

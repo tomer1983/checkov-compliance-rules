@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+checkov-env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Checkov outputs
+checkov-results.*
+results.sarif
+results.xml
+results.json
+
+# Test outputs
+test-results/
+*.log
+
+# Temporary files
+*.tmp
+tmp/
+.tmp/

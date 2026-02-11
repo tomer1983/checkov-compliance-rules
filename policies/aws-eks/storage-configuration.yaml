@@ -1,0 +1,84 @@
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_014"
+  name: "Ensure pod uses EBS CSI driver for persistent storage"
+  category: "AWS_EKS_STORAGE"
+  severity: "MEDIUM"
+  guideline: "Use EBS CSI driver for persistent storage instead of deprecated in-tree provisioners."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "StorageClass"
+  attribute: "provisioner"
+  operator: "equals"
+  value: "ebs.csi.aws.com"
+
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_015"
+  name: "Ensure EBS volume has proper volume type configured"
+  category: "AWS_EKS_STORAGE"
+  severity: "LOW"
+  guideline: "Use gp3 volumes for better performance and cost optimization."
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "StorageClass"
+      attribute: "provisioner"
+      operator: "equals"
+      value: "ebs.csi.aws.com"
+    - cond_type: "attribute"
+      resource_types:
+        - "StorageClass"
+      attribute: "parameters.type"
+      operator: "within"
+      value:
+        - "gp3"
+        - "io2"
+
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_016"
+  name: "Ensure EFS CSI driver is used for shared storage"
+  category: "AWS_EKS_STORAGE"
+  severity: "LOW"
+  guideline: "EFS CSI driver provides shared file storage across multiple pods and availability zones."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "StorageClass"
+  attribute: "provisioner"
+  operator: "equals"
+  value: "efs.csi.aws.com"
+
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_017"
+  name: "Ensure StorageClass has proper reclaim policy"
+  category: "AWS_EKS_STORAGE"
+  severity: "MEDIUM"
+  guideline: "Use 'Retain' or 'Delete' reclaim policy based on data retention requirements."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "StorageClass"
+  attribute: "reclaimPolicy"
+  operator: "within"
+  value:
+    - "Retain"
+    - "Delete"
+
+---
+metadata:
+  id: "CKV_EKS_CUSTOM_018"
+  name: "Ensure PersistentVolumeClaim requests appropriate storage size"
+  category: "AWS_EKS_STORAGE"
+  severity: "LOW"
+  guideline: "PVCs should request appropriate storage to avoid waste and ensure sufficient capacity."
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "PersistentVolumeClaim"
+  attribute: "spec.resources.requests.storage"
+  operator: "exists"
