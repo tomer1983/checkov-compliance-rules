@@ -1,0 +1,31 @@
+---
+# Example of a NON-COMPLIANT deployment (for testing)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insecure-app
+  namespace: development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: insecure-app
+  template:
+    metadata:
+      labels:
+        app: insecure-app
+    spec:
+      # Missing serviceAccountName
+      hostNetwork: true  # Security risk
+      containers:
+      - name: app
+        image: myapp:latest  # Using 'latest' tag
+        # Missing imagePullPolicy
+        ports:
+        - containerPort: 8080
+        # Missing resources
+        securityContext:
+          privileged: true  # Running privileged
+          # Missing capabilities drop
+          # Missing readOnlyRootFilesystem
+        # Missing liveness and readiness probes

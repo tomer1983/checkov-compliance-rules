@@ -1,0 +1,35 @@
+# Checkov configuration file
+# This file can be used to configure Checkov behavior
+
+# Directories to check (relative to this config file)
+directory:
+  - examples
+
+# External check directories
+external-checks-dir:
+  - kubernetes/basic
+  - eks/specific
+
+# Skip specific checks (uncomment to skip)
+# skip-check:
+#   - CKV_K8S_CUSTOM_008  # Skip liveness probe check
+#   - CKV_K8S_CUSTOM_009  # Skip readiness probe check
+
+# Output format (json, cli, junitxml, github_failed_only, sarif)
+output: cli
+
+# Compact output mode
+compact: true
+
+# Quiet mode - only show failed checks
+# quiet: true
+
+# Soft fail mode - don't exit with error code on failures
+# soft-fail: true
+
+# Download external modules
+# download-external-modules: true
+
+# Framework to run (all, kubernetes, terraform, etc.)
+framework:
+  - kubernetes

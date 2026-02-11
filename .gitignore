@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Checkov
+.checkov/
+checkov-report.json
+checkov-report.xml
+
+# Test outputs
+results.json
+results.xml
+*.sarif
+
+# Temporary files
+tmp/
+temp/
+*.tmp
