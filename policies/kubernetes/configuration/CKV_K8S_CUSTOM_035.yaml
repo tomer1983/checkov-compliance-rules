@@ -1,0 +1,20 @@
+---
+metadata:
+  id: "CKV_K8S_CUSTOM_035"
+  name: "Ensure node selector or node affinity is defined for workload placement"
+  category: "KUBERNETES_CONFIGURATION"
+  severity: "LOW"
+  guideline: "Node selectors and node affinity enable precise workload placement on specific node types (e.g., spot instances, GPU nodes, specific zones) for cost optimization and performance in cloud environments."
+definition:
+  cond_type: "or"
+  resource_types:
+    - "Deployment"
+    - "StatefulSet"
+    - "DaemonSet"
+  or:
+    - cond_type: "attribute"
+      attribute: "spec.template.spec.nodeSelector"
+      operator: "exists"
+    - cond_type: "attribute"
+      attribute: "spec.template.spec.affinity.nodeAffinity"
+      operator: "exists"

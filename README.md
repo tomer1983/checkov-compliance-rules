@@ -25,7 +25,7 @@ Checkov is a static code analysis tool for infrastructure-as-code. It scans clou
 
 ## ✨ Features
 
-- **30+ Custom Policies**: Comprehensive coverage of Kubernetes security and best practices
+- **35+ Custom Policies**: Comprehensive coverage of Kubernetes security and best practices
 - **Organized by Category**: Easy to navigate and selectively apply policies
 - **AWS EKS Support**: Dedicated policies for EKS-specific features (IRSA, ALB, EBS CSI, etc.)
 - **Production Ready**: Based on real-world enterprise requirements
@@ -220,6 +220,11 @@ checkov -f examples/kubernetes/insecure-deployment.yaml --external-checks-dir ./
 | CKV_K8S_CUSTOM_028 | RollingUpdate strategy | LOW | Validates deployment strategy |
 | CKV_K8S_CUSTOM_029 | Labels defined | LOW | Ensures labels exist |
 | CKV_K8S_CUSTOM_030 | App label defined | LOW | Ensures app label exists |
+| CKV_K8S_CUSTOM_031 | Topology spread constraints | LOW | Ensures optimal pod distribution across zones/nodes |
+| CKV_K8S_CUSTOM_032 | Priority class defined | LOW | Ensures priority class for production workloads |
+| CKV_K8S_CUSTOM_033 | Active deadline for jobs | LOW | Prevents jobs from running indefinitely |
+| CKV_K8S_CUSTOM_034 | Termination grace period | LOW | Ensures graceful shutdown configuration |
+| CKV_K8S_CUSTOM_035 | Node selector or affinity | LOW | Ensures workload placement control |
 
 ### Networking Policies
 
